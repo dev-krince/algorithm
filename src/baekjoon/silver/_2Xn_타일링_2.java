@@ -1,6 +1,8 @@
+package baekjoon.silver;
+
 import java.io.*;
 
-public class Main {
+public class _2Xn_타일링_2 {
     static int[] memoization = new int[1001];
 
     public static void main(String[] args) throws IOException {
