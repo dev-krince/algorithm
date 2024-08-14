@@ -1,7 +1,10 @@
-import java.io.*;
-import java.util.*;
+package baekjoon.silver;
 
-public class Main {
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class _1_2_3_더하기 {
     static int[] memoization = new int[11];
 
     public static void main(String[] args) throws IOException {
