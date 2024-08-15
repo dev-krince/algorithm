@@ -1,6 +1,8 @@
+package baekjoon.silver;
+
 import java.io.*;
 
-public class Main {
+public class 계단_오르기 {
     static int[][] memoization = new int[3][301];
     static int[] scoreOfStep = new int[301];
 
