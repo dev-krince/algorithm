@@ -1,34 +1,25 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    static int[] memoization = new int[11];
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int testcaseLength = Integer.parseInt(br.readLine());
-        List<Integer> testcases = new ArrayList<>();
+        int T = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < testcaseLength; i++) {
-            testcases.add(Integer.parseInt(br.readLine()));
+        for(int i = 0; i < T; i++){
+            int N = Integer.parseInt(br.readLine());
+            int[] fibonacci0 = new int[41];
+            int[] fibonacci1 = new int[41];
+            fibonacci0[0] = 1;
+            fibonacci0[1] = 0;
+            fibonacci1[0] = 0;
+            fibonacci1[1] = 1;
+            for(int k = 2; k <= N; k++){
+                fibonacci0[k] = fibonacci0[k-1] + fibonacci0[k-2];
+                fibonacci1[k] = fibonacci1[k-1] + fibonacci1[k-2];
+            }
+            System.out.println(fibonacci0[N] + " " + fibonacci1[N]);
         }
-        br.close();
-
-        for (int i = 0; i < testcaseLength; i++) {
-            bw.write(dp(testcases.get(i)) + "\n");
-        }
-
-        bw.flush();
-        bw.close();
-    }
-
-    public static int dp(int n) {
-        if (n == 1) return 1;
-        if (n == 2) return 2;
-        if (n == 3) return 4;
-        if (memoization[n] != 0) return memoization[n];
-
-        return dp(n - 1) + dp(n - 2) + dp(n - 3);
     }
 }
