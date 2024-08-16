@@ -10,19 +10,15 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
         int[] basket = new int[N + 1];
 
-        for (int i = 1; i <= N; i++) {
-            basket[i] = i;
-        }
-
-        for (int i = 0; i < M; i++) {
+        for (int i = 1; i <= M; i++) {
             StringTokenizer st1 = new StringTokenizer(br.readLine());
-            int number1 = Integer.parseInt(st1.nextToken());
-            int number2 = Integer.parseInt(st1.nextToken());
-            int target1 = basket[number1];
-            int target2 = basket[number2];
+            int firstBasket = Integer.parseInt(st1.nextToken());
+            int lastBasket = Integer.parseInt(st1.nextToken());
+            int number = Integer.parseInt(st1.nextToken());
 
-            basket[number1] = target2;
-            basket[number2] = target1;
+            for (int j = firstBasket; j <= lastBasket; j++) {
+                basket[j] = number;
+            }
         }
 
         br.close();
