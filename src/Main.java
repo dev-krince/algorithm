@@ -1,40 +1,37 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int[][] memoization = new int[3][301];
-    static int[] scoreOfStep = new int[301];
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int numberOfStep = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[] basket = new int[N + 1];
 
-        for (int i = 1; i <= numberOfStep; i++) {
-            scoreOfStep[i] = Integer.parseInt(br.readLine());
+        for (int i = 1; i <= N; i++) {
+            basket[i] = i;
+        }
+
+        for (int i = 0; i < M; i++) {
+            StringTokenizer st1 = new StringTokenizer(br.readLine());
+            int number1 = Integer.parseInt(st1.nextToken());
+            int number2 = Integer.parseInt(st1.nextToken());
+            int target1 = basket[number1];
+            int target2 = basket[number2];
+
+            basket[number1] = target2;
+            basket[number2] = target1;
         }
 
         br.close();
 
-        int result = Math.max(oneStepDp(numberOfStep), twoStepDp(numberOfStep));
+        for (int i = 1; i <= N; i++) {
+            bw.write(basket[i] + " ");
+        }
 
-        bw.write(String.valueOf(result));
         bw.flush();
         bw.close();
-    }
-
-    public static int oneStepDp(int numberOfStep) {
-        if (numberOfStep == 1) return memoization[1][1] = scoreOfStep[1];
-        if (numberOfStep == 2) return memoization[1][2] = scoreOfStep[1] + scoreOfStep[2];
-        if (memoization[1][numberOfStep] != 0) return memoization[1][numberOfStep];
-
-        return memoization[1][numberOfStep] = twoStepDp(numberOfStep - 1) + scoreOfStep[numberOfStep];
-    }
-
-    public static int twoStepDp(int numberOfStep) {
-        if (numberOfStep == 1) return 0;
-        if (numberOfStep == 2) return memoization[2][numberOfStep] = scoreOfStep[numberOfStep];
-        if (memoization[2][numberOfStep] != 0) return memoization[2][numberOfStep];
-
-        return memoization[2][numberOfStep] = Math.max(oneStepDp(numberOfStep - 2), twoStepDp(numberOfStep - 2)) + scoreOfStep[numberOfStep];
     }
 }
