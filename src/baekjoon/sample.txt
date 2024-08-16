@@ -9,7 +9,6 @@ public class Main {
 
         br.close();
 
-        bw.write();
         bw.flush();
         bw.close();
     }
